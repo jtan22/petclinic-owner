@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface OwnerRepository extends CrudRepository<Owner, Integer>, PagingAndSortingRepository<Owner, Integer> {
 
     @Query("select owner from Owner owner where owner.lastName like :lastName%")
-    Page<Owner> findByLastName(String lastName, Pageable pageable);
+    Page<Owner> findPageByLastName(String lastName, Pageable pageable);
 
 }

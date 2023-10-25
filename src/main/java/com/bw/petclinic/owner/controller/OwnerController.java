@@ -70,7 +70,7 @@ public class OwnerController {
         if (StringUtils.isBlank(lastName)) {
             return new PagedOwners(ownerRepository.findAll(pageable));
         } else {
-            return new PagedOwners(ownerRepository.findByLastName(lastName, pageable));
+            return new PagedOwners(ownerRepository.findPageByLastName(lastName, pageable));
         }
     }
 
