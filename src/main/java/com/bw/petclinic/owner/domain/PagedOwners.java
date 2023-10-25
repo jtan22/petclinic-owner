@@ -4,6 +4,9 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
+/**
+ * Wrapper class to wrap a Page of Owners.
+ */
 public class PagedOwners {
 
     private List<Owner> owners;
