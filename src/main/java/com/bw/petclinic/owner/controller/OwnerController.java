@@ -16,8 +16,12 @@ public class OwnerController {
 
     private static final Logger LOG = LoggerFactory.getLogger(OwnerController.class);
 
+    private final OwnerRepository ownerRepository;
+
     @Autowired
-    private OwnerRepository ownerRepository;
+    public OwnerController(OwnerRepository ownerRepository) {
+        this.ownerRepository = ownerRepository;
+    }
 
     /**
      * Health check

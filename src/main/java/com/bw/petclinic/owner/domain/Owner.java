@@ -16,13 +16,13 @@ public class Owner {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "address")
+    @Column
     private String address;
 
-    @Column(name = "city")
+    @Column
     private String city;
 
-    @Column(name = "telephone")
+    @Column
     private String telephone;
 
     public int getId() {
