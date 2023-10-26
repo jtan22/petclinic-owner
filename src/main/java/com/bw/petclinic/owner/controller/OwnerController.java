@@ -9,7 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 @RestController
 public class OwnerController {
@@ -42,7 +47,12 @@ public class OwnerController {
     @GetMapping("/owners")
     public Owner getById(@RequestParam("ownerId") int ownerId) {
         LOG.info("GET /owners with ownerId [" + ownerId + "]");
-        return ownerRepository.findById(ownerId).orElseGet(Owner::new);
+        Optional<Owner> owner = ownerRepository.findById(ownerId);
+        if (owner.isPresent()) {
+            return owner.get();
+        } else {
+            throw new OwnerNotFoundException("Owner [" + ownerId + "] not found");
+        }
     }
 
     /**
@@ -76,6 +86,12 @@ public class OwnerController {
         } else {
             return new PagedOwners(ownerRepository.findPageByLastName(lastName, pageable));
         }
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<OwnerErrorResponse> handleOwnerNotFoundException(OwnerNotFoundException e) {
+        OwnerErrorResponse error = new OwnerErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage(), LocalDateTime.now());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
 }
