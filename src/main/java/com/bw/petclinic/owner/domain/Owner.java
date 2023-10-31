@@ -25,6 +25,19 @@ public class Owner {
     @Column
     private String telephone;
 
+    public Owner() {
+
+    }
+
+    public Owner(int id, String firstName, String lastName, String address, String city, String telephone) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.telephone = telephone;
+    }
+
     public int getId() {
         return id;
     }
