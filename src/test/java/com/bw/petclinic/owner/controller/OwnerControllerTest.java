@@ -62,10 +62,8 @@ public class OwnerControllerTest {
                     pageable,
                     12));
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/owners/find")
-                        .param("lastName", "Tan")
-                        .param("pageNumber", "0")
-                        .param("pageSize", "3"))
+                        .get("/owners/find?lastName={lastName}&pageNumber={pageNumber}&pageSize={pageSize}",
+                                "Tan", 0, 3))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.content", hasSize(3)))
